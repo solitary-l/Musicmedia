@@ -49,6 +49,8 @@ public class MainActivity extends Activity {
     private Timer timer;
     private ArrayList<String> list;
     private File[] songFiles;
+    private int song;
+    private int finsong;
 
 
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -107,6 +109,7 @@ public class MainActivity extends Activity {
             String str = file.getAbsolutePath();
             String str1 = str.substring(str.indexOf("/music/")+7,str.indexOf(".mp3"));
             list.add(str1);
+            song++;
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
@@ -120,27 +123,27 @@ public class MainActivity extends Activity {
         li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                song_path = ((TextView) view).getText().toString();
-                cp = position;
-                changeMusic(cp);
-                try {
-                    mp.reset();    //重置
-                    mp.setDataSource(song_path);
-                    mp.prepare();     //准备
-                    mp.start(); //播放
-                    seekBar.setMax(mp.getDuration());
-                    isStop = false;
-                    timer = new Timer();
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (!isSeekBarChanging) {
-                                seekBar.setProgress(mp.getCurrentPosition());
+                    song_path = ((TextView) view).getText().toString();
+                    cp = position;
+                    changeMusic(cp);
+                    try {
+                        mp.reset();    //重置
+                        mp.setDataSource(song_path);
+                        mp.prepare();     //准备
+                        mp.start(); //播放
+                        seekBar.setMax(mp.getDuration());
+                        isStop = false;
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                if (!isSeekBarChanging) {
+                                    seekBar.setProgress(mp.getCurrentPosition());
+                                }
                             }
-                        }
-                    }, 0, 50);
-                } catch (Exception e) {
-                }
+                        }, 0, 50);
+                    } catch (Exception e) {
+                    }
             }
 
         });
@@ -163,13 +166,15 @@ public class MainActivity extends Activity {
         final RadioButton playsequence = (RadioButton) findViewById(R.id.rbtn_playsequence);
         playsequence.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-            cp++;
-            if (cp >= list.size()) {
-               cp = 0;
+            public void onClick(View v) {
+                for (finsong = 0; finsong <= song; finsong++) {
+                    cp++;
+                    if (cp >= list.size()) {
+                        cp = 0;
+                    }
+                    changeMusic(cp);
+                }
             }
-            changeMusic(cp);
-        }
         });
 
 
@@ -225,7 +230,6 @@ public class MainActivity extends Activity {
             mp.setDataSource(song_path);
             // 开始播放前的准备工作，加载多媒体资源，获取相关信息
             mp.prepare();
-
             // 开始播放
             mp.start();
         } catch (IOException e) {
