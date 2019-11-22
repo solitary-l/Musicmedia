@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
     private TextView totalTV;
     boolean isStop = true;
     private boolean isSeekBarChanging;//互斥变量，防止进度条与定时器冲突。
-    private int currentposition;//当前音乐播放的进度
+    private int cp;//当前音乐播放的进度
     private Timer timer;
     private ArrayList<String> list;
     private File[] songFiles;
@@ -121,8 +121,8 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 song_path = ((TextView) view).getText().toString();
-                currentposition = position;
-                changeMusic(currentposition);
+                cp = position;
+                changeMusic(cp);
                 try {
                     mp.reset();    //重置
                     mp.setDataSource(song_path);
@@ -136,7 +136,6 @@ public class MainActivity extends Activity {
                         public void run() {
                             if (!isSeekBarChanging) {
                                 seekBar.setProgress(mp.getCurrentPosition());
-
                             }
                         }
                     }, 0, 50);
@@ -153,9 +152,9 @@ public class MainActivity extends Activity {
         playrandowm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                currentposition = new Random().nextInt(list.size());
+               cp = new Random().nextInt(list.size());
                 Toast.makeText(MainActivity.this, "随机", Toast.LENGTH_SHORT).show();
-                changeMusic(currentposition);
+                changeMusic(cp);
 
         }
         });
@@ -165,11 +164,11 @@ public class MainActivity extends Activity {
         playsequence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-            currentposition++;
-            if (currentposition >= list.size()) {
-                currentposition = 0;
+            cp++;
+            if (cp >= list.size()) {
+               cp = 0;
             }
-            changeMusic(currentposition);
+            changeMusic(cp);
         }
         });
 
@@ -198,14 +197,14 @@ public class MainActivity extends Activity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeMusic(--currentposition);
+                changeMusic(--cp);
             }
         });
         final ImageButton next = (ImageButton) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeMusic(++currentposition);
+                changeMusic(++cp);
             }
         });
 
@@ -213,9 +212,9 @@ public class MainActivity extends Activity {
 
     private void changeMusic(int position) {
         if (position < 0) {
-            currentposition = position = list.size() - 1;
+            cp = position = list.size() - 1;
         } else if (position > list.size() - 1) {
-            currentposition = position = 0;
+            cp = position = 0;
         }
         song_path = songFiles[position].getAbsolutePath();
 
