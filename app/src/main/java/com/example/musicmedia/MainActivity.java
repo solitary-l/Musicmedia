@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -143,6 +145,36 @@ public class MainActivity extends Activity {
             }
 
         });
+
+
+
+        //随机播放方法
+        final RadioButton playrandowm = (RadioButton) findViewById(R.id.rbtn_playrandowm);
+        playrandowm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+            currentposition = new Random().nextInt(list.size());
+            Toast.makeText(MainActivity.this, "随机", Toast.LENGTH_SHORT).show();
+            mp.reset();
+            mp.start();
+
+        }
+        });
+
+        //自动播放
+        final RadioButton playsequence = (RadioButton) findViewById(R.id.rbtn_playsequence);
+        playsequence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+            currentposition++;
+            if (currentposition >= list.size()) {
+                currentposition = 0;
+            }
+            mp.reset();
+            mp.start();
+        }
+        });
+
 
         //暂停和播放
         final ImageButton btnpause = (ImageButton) findViewById(R.id.btn_pause);

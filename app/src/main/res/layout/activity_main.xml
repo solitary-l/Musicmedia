@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="@mipmap/bgg"
     >
 
 
@@ -65,6 +64,12 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+
+
+
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -78,6 +83,40 @@
                 android:layout_weight="4" />
 
         </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbtn_playsequence"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_centerInParent="true"
+                android:text="顺序循环播放"
+                android:button="@null" />
+
+            <RadioButton
+                android:id="@+id/rbtn_playrandowm"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_toLeftOf="@id/rbtn_playsequence"
+                android:text="随机循环播放"
+                android:button="@null" />
+
+
+
+        </LinearLayout>
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
