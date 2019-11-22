@@ -41,8 +41,8 @@ public class MainActivity extends Activity {
     final MediaPlayer mp = new MediaPlayer();
     String song_path = "";
     private SeekBar seekBar;
-    private TextView currentTV;
-    private TextView totalTV;
+    private TextView cTV;
+    private TextView tTV;
     boolean isStop = true;
     private boolean isSeekBarChanging;//互斥变量，防止进度条与定时器冲突。
     private int cp;//当前音乐播放的进度
@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
             // 展示给进度条和当前时间
             int progress = mp.getCurrentPosition();
             seekBar.setProgress(progress);
-            currentTV.setText(formatTime(progress));
+            cTV.setText(formatTime(progress));
             // 继续定时发送数据
             updateProgress();
             return true;
@@ -78,8 +78,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        totalTV = findViewById(R.id.music_total_time);
-        currentTV = findViewById(R.id.music_current_time);
+        tTV = findViewById(R.id.music_total_time);
+        cTV = findViewById(R.id.music_current_time);
         seekBar = (SeekBar) findViewById(R.id.music_seekbar);
         seekBar.setOnSeekBarChangeListener(new MySeekBar());
 
@@ -233,7 +233,7 @@ public class MainActivity extends Activity {
         }
         seekBar.setProgress(0);//将进度条初始化
         seekBar.setMax(mp.getDuration());//设置进度条最大值为歌曲总时间
-        totalTV.setText(formatTime(mp.getDuration()));//显示歌曲总时长
+        tTV.setText(formatTime(mp.getDuration()));//显示歌曲总时长
 
         updateProgress();//更新进度条
     }
