@@ -35,6 +35,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#FFD700"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -44,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="#FFD700"
                 android:text="00:00"
                 android:textStyle="bold"
                 tools:autoText="false" />
@@ -52,6 +54,7 @@
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="#FFD700"
                 android:layout_weight="4" />
 
             <TextView
@@ -60,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="#FFD700"
                 android:text="00:00"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -74,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#FFF5EE"
             android:orientation="horizontal">
 
             <SeekBar
@@ -99,6 +104,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_centerInParent="true"
+                android:background="#FFA500"
                 android:text="顺序循环播放"
                 android:button="@null" />
 
@@ -108,6 +114,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_toLeftOf="@id/rbtn_playsequence"
+                android:background="#FFA500"
                 android:text="随机循环播放"
                 android:button="@null" />
 
@@ -129,7 +136,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="#D81B60"
                 android:src="@android:drawable/ic_media_previous" />
 
             <ImageButton
@@ -137,7 +144,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="#008577"
                 android:elevation="13dp"
                 android:src="@android:drawable/ic_media_pause" />
 
@@ -146,7 +153,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="#D81B60"
                 android:src="@android:drawable/ic_media_next" />
 
         </LinearLayout>

@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
         }
     });
 
-    //3、使用formatTime方法对时间格式化：
+    //使用formatTime方法对时间格式化：
     private String formatTime(int length) {
         Date date = new Date(length);
         //时间格式化工具
@@ -148,15 +148,14 @@ public class MainActivity extends Activity {
 
 
 
-        //随机播放方法
+        //随机播放
         final RadioButton playrandowm = (RadioButton) findViewById(R.id.rbtn_playrandowm);
         playrandowm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-            currentposition = new Random().nextInt(list.size());
-            Toast.makeText(MainActivity.this, "随机", Toast.LENGTH_SHORT).show();
-            mp.reset();
-            mp.start();
+                currentposition = new Random().nextInt(list.size());
+                Toast.makeText(MainActivity.this, "随机", Toast.LENGTH_SHORT).show();
+                changeMusic(currentposition);
 
         }
         });
@@ -170,8 +169,7 @@ public class MainActivity extends Activity {
             if (currentposition >= list.size()) {
                 currentposition = 0;
             }
-            mp.reset();
-            mp.start();
+            changeMusic(currentposition);
         }
         });
 
