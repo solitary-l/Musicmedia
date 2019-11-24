@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
         songFiles = path.listFiles(new MyFilter(".mp3"));
         for (File file : songFiles) {
             String str = file.getAbsolutePath();
-            String str1 = str.substring(str.indexOf("/music/")+7,str.indexOf(".mp3"));
+            String str1 = str.substring(str.indexOf("/music/")+26,str.indexOf(".mp3"));
             list.add(str1);
             song++;
         }
@@ -123,27 +123,29 @@ public class MainActivity extends Activity {
         li.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    song_path = ((TextView) view).getText().toString();
-                    cp = position;
-                    changeMusic(cp);
-                    try {
-                        mp.reset();    //重置
-                        mp.setDataSource(song_path);
-                        mp.prepare();     //准备
-                        mp.start(); //播放
-                        seekBar.setMax(mp.getDuration());
-                        isStop = false;
-                        timer = new Timer();
-                        timer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                if (!isSeekBarChanging) {
-                                    seekBar.setProgress(mp.getCurrentPosition());
-                                }
+                song_path = ((TextView) view).getText().toString();
+                cp = position;
+                changeMusic(cp);
+                try {
+                    String s = song_path.substring(song_path.indexOf("/music/")+26,song_path.indexOf(".mp3"));
+                    Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                    mp.reset();    //重置
+                    mp.setDataSource(song_path);
+                    mp.prepare();     //准备
+                    mp.start(); //播放
+                    seekBar.setMax(mp.getDuration());
+                    isStop = false;
+                    timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            if (!isSeekBarChanging) {
+                                seekBar.setProgress(mp.getCurrentPosition());
                             }
-                        }, 0, 50);
-                    } catch (Exception e) {
-                    }
+                        }
+                    }, 0, 50);
+                } catch (Exception e) {
+                }
             }
 
         });
@@ -155,11 +157,11 @@ public class MainActivity extends Activity {
         playrandowm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-               cp = new Random().nextInt(list.size());
+                cp = new Random().nextInt(list.size());
                 Toast.makeText(MainActivity.this, "随机", Toast.LENGTH_SHORT).show();
                 changeMusic(cp);
 
-        }
+            }
         });
 
         //自动播放
@@ -222,6 +224,8 @@ public class MainActivity extends Activity {
             cp = position = 0;
         }
         song_path = songFiles[position].getAbsolutePath();
+        String s = song_path.substring(song_path.indexOf("/music/")+26,song_path.indexOf(".mp3"));
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
 
         try {
             // 切歌之前先重置，释放掉之前的资源
