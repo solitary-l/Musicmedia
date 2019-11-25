@@ -51,6 +51,7 @@ public class MainActivity extends Activity {
     private File[] songFiles;
     private int song;
     private int finsong;
+    private int mode = 0;
 
 
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -144,6 +145,7 @@ public class MainActivity extends Activity {
                             }
                         }
                     }, 0, 50);
+
                 } catch (Exception e) {
                 }
             }
@@ -169,13 +171,13 @@ public class MainActivity extends Activity {
         playsequence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (finsong = 0; finsong <= song; finsong++) {
+
                     cp++;
                     if (cp >= list.size()) {
                         cp = 0;
                     }
                     changeMusic(cp);
-                }
+
             }
         });
 
